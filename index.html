@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <section>
+        <div class="container">
+          <form action="https://formspree.io/f/myyldqwq" method="POST" id="my-form">
+      
+            <div class="form-group">
+              <label for="firstName"> First Name</label>
+              <input type="text" id="firstName" name="firstName">
+            </div>
+      
+            <div class="form-group">
+              <label for="latsName">Last Name</label>
+              <input type="text" id="lastName" name="lastName">
+            </div>
+      
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email">
+            </div>
+      
+            <div class="form-group">
+              <label for="massage">Massage</label>
+              <textarea name="massage" id="massage" cols="30" rows="10"></textarea>
+            </div>
+      
+            <button type="submit" id="my-form-button">Submit</button>
+          </form>
+        </div>
+        <div id="status"></div>
+      </section>
+
+      <script src="site.js"/></script>
+      <script>
+        var form = document.getElementById("my-form");
+        
+        async function handleSubmit(event) {
+          event.preventDefault();
+          var status = document.getElementById("my-form-status");
+          var data = new FormData(event.target);
+          fetch(event.target.action, {
+            method: form.method,
+            body: data,
+            headers: {
+                'Accept': 'application/json'
+            }
+          }).then(response => {
+            status.innerHTML = "Thanks for your submission!";
+            form.reset()
+          }).catch(error => {
+            status.innerHTML = "Oops! There was a problem submitting your form"
+          });
+        }
+        form.addEventListener("submit", handleSubmit)
+    </script>
+</body>
+</html>
